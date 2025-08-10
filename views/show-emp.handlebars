@@ -1,0 +1,21 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">City</th>
+    </tr>
+  </thead>
+  {{#each list}}
+  <tbody>
+    <tr class="table-active">
+      <td>{{this.Fullname}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.phone}}</td>
+      <td>{{this.city}}</td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
