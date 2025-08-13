@@ -31,4 +31,53 @@ router.get('/view-employee', async (req, res) =>{
    }
 })
 
+router.get('/delete-employee', async (req,res)=>{
+    try {
+        const employee = await Employee.find().lean();
+        res.render('delete-emp', { list: employee });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+router.get('/delete/:id', async (req, res)=>{
+    try{
+        const employeeId = req.params.id;
+        await Employee.findByIdAndDelete(employeeId);
+        res.redirect('/employee/delete-employee');
+    }catch(error){
+        console.log(error);
+    }
+})
+
+router.get('/update-employee/', async (req, res) => {
+      try {
+        const employee = await Employee.find().lean();
+        res.render('update-emp', { list: employee });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/edit-employee/:id', async (req, res) => {
+    try{
+        const employeeId = req.params.id;
+        const employee = await Employee.findById(employeeId).lean();
+        res.render('edit-emp', { employee });
+    }catch(error){
+        console.log(error);
+    }
+})
+
+router.post('/update-emp/:id', async (req, res) => {
+   try{
+     await Employee.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect('/');
+   } catch (error){
+       console.log(error);
+   }
+})
+
+
 module.exports = router;
